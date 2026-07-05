@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O'Brian Griffith — AI Analyst · Cybersecurity & Data Specialist</title>
+<meta name="description" content="O'Brian Griffith — early-career technology professional from Barbados. AI, cybersecurity, data, IT support, and software. CompTIA Security+ certified.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#050810;
+  --bg-2:#070c19;
+  --bg-3:#0a1024;
+  --panel:rgba(14,22,42,.55);
+  --panel-strong:rgba(18,28,52,.85);
+  --border:rgba(110,180,255,.12);
+  --border-bright:rgba(0,212,255,.35);
+  --text:#e9f1ff;
+  --text-dim:#94a6c4;
+  --text-mute:#5a6a87;
+  --accent:#00d4ff;
+  --accent-2:#4d8eff;
+  --accent-3:#b85cff;
+  --accent-warm:#ffb74d;
+  --glow:0 0 40px rgba(0,212,255,.25);
+  --glow-strong:0 0 60px rgba(0,212,255,.45);
+  --radius:14px;
+  --radius-lg:22px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease-precise:cubic-bezier(.4,0,.2,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* Background atmosphere */
+body::before{
+  content:'';position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 0%,rgba(0,212,255,.08),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 30%,rgba(77,142,255,.06),transparent 60%),
+    radial-gradient(ellipse 70% 60% at 50% 100%,rgba(184,92,255,.05),transparent 60%),
+    var(--bg);
+}
+body::after{
+  content:'';position:fixed;inset:0;z-index:-1;
+  background-image:
+    linear-gradient(rgba(110,180,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(110,180,255,.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,#000 30%,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,#000 30%,transparent 80%);
+  pointer-events:none;
+}
+
+::selection{background:rgba(0,212,255,.3);color:#fff}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg-2)}
+::-webkit-scrollbar-thumb{background:rgba(0,212,255,.2);border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:rgba(0,212,255,.4)}
+
+/* ============ CURSOR ============ */
+.cursor-dot,.cursor-ring{
+  position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
+  border-radius:50%;mix-blend-mode:screen;
+  transition:opacity .3s;
+}
+.cursor-dot{
+  width:6px;height:6px;background:var(--accent);
+  transform:translate(-50%,-50%);
+}
+.cursor-ring{
+  width:36px;height:36px;border:1px solid rgba(0,212,255,.5);
+  transform:translate(-50%,-50%);
+  transition:width .25s,height .25s,border-color .25s,transform .12s var(--ease);
+}
+.cursor-ring.active{width:60px;height:60px;border-color:rgba(0,212,255,.9)}
+@media(hover:none),(pointer:coarse){
+  .cursor-dot,.cursor-ring{display:none}
+  body{cursor:auto}
+}
+@media(hover:hover) and (pointer:fine){
+  body{cursor:none}
+  a,button,.tilt-card,.skill-card,.cert-card{cursor:none}
+}
+
+/* ============ SCROLL PROGRESS ============ */
+.scroll-progress{
+  position:fixed;top:0;left:0;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--accent-3));
+  z-index:1000;box-shadow:0 0 12px rgba(0,212,255,.7);
+  transition:width .1s linear;
+}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(5,8,16,.6);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid var(--border);
+  transition:padding .3s var(--ease);
+}
+.nav.scrolled{padding:12px 40px}
+.nav__logo{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;color:var(--text);
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;font-size:18px;letter-spacing:-.02em;
+}
+.nav__logo-mark{
+  width:36px;height:36px;border-radius:9px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  display:grid;place-items:center;
+  font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;
+  color:#021219;
+  box-shadow:0 0 20px rgba(0,212,255,.4);
+  position:relative;
+}
+.nav__logo-mark::after{
+  content:'';position:absolute;inset:0;border-radius:9px;
+  border:1px solid rgba(255,255,255,.2);
+}
+.nav__logo-text{display:flex;flex-direction:column;line-height:1.1}
+.nav__logo-text small{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  font-weight:400;color:var(--text-dim);letter-spacing:.15em;
+  text-transform:uppercase;margin-top:2px;
+}
+.nav__links{display:flex;gap:6px;align-items:center}
+.nav__links a{
+  color:var(--text-dim);text-decoration:none;font-size:13px;font-weight:500;
+  padding:8px 14px;border-radius:8px;
+  font-family:'JetBrains Mono',monospace;letter-spacing:.02em;
+  transition:color .2s,background .2s;
+  position:relative;
+}
+.nav__links a:hover{color:var(--text);background:rgba(0,212,255,.06)}
+.nav__status{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 14px;border-radius:100px;
+  background:rgba(0,212,255,.08);
+  border:1px solid rgba(0,212,255,.25);
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--accent);letter-spacing:.08em;text-transform:uppercase;
+}
+.nav__status .dot{
+  width:7px;height:7px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 10px var(--accent);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.5;transform:scale(1.3)}
+}
+.nav__menu-btn{display:none;background:none;border:none;color:var(--text);font-size:20px}
+
+/* ============ LAYOUT ============ */
+.container{max-width:1280px;margin:0 auto;padding:0 40px}
+section{padding:120px 0;position:relative}
+.section__header{margin-bottom:64px}
+.section__eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  color:var(--accent);letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:20px;
+}
+.section__eyebrow::before{
+  content:'';width:32px;height:1px;background:var(--accent);
+}
+.section__title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(32px,4vw,52px);font-weight:700;
+  line-height:1.05;letter-spacing:-.025em;
+  max-width:800px;
+}
+.section__title .accent{color:var(--accent)}
+.section__title .dim{color:var(--text-dim)}
+.section__sub{
+  margin-top:18px;font-size:17px;color:var(--text-dim);
+  max-width:620px;line-height:1.6;
+}
+
+/* ============ HERO ============ */
+.hero{
+  min-height:100vh;
+  padding:140px 40px 80px;
+  position:relative;
+  display:flex;align-items:center;
+  overflow:hidden;
+}
+.hero__bg{position:absolute;inset:0;z-index:0}
+#core-canvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  display:block;
+}
+.hero__grid-overlay{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg,var(--bg) 0%,transparent 20%,transparent 80%,var(--bg) 100%),
+    radial-gradient(ellipse 60% 80% at 70% 50%,transparent 0%,var(--bg) 90%);
+}
+.hero__content{
+  position:relative;z-index:2;
+  max-width:1280px;margin:0 auto;
+  width:100%;
+  display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;
+}
+.hero__left{max-width:680px}
+.hero__eyebrow{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  color:var(--text-dim);letter-spacing:.25em;text-transform:uppercase;
+  padding:8px 16px;border-radius:100px;
+  background:var(--panel);border:1px solid var(--border);
+  backdrop-filter:blur(10px);
+  margin-bottom:32px;
+}
+.hero__eyebrow .dot{
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 8px var(--accent);
+  animation:pulse 2s infinite;
+}
+.hero__eyebrow .sep{color:var(--text-mute)}
+.hero__name{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(48px,7vw,92px);font-weight:700;
+  line-height:.95;letter-spacing:-.04em;
+  margin-bottom:24px;
+}
+.hero__name .line{display:block}
+.hero__name .accent{
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero__headline{
+  font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;
+  color:var(--text-dim);letter-spacing:.05em;
+  margin-bottom:28px;
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+}
+.hero__headline .pill{
+  padding:5px 12px;border-radius:100px;
+  background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.2);
+  color:var(--text);font-size:12px;
+}
+.hero__headline .sep{color:var(--text-mute)}
+.hero__message{
+  font-size:18px;line-height:1.6;color:var(--text-dim);
+  max-width:560px;margin-bottom:40px;
+}
+.hero__message strong{color:var(--text);font-weight:500}
+.hero__cta{
+  display:flex;flex-wrap:wrap;gap:12px;margin-bottom:48px;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 22px;border-radius:11px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;
+  letter-spacing:.05em;text-transform:uppercase;
+  text-decoration:none;color:var(--text);
+  border:1px solid var(--border);background:var(--panel);
+  backdrop-filter:blur(10px);
+  transition:all .25s var(--ease);
+  position:relative;overflow:hidden;
+}
+.btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,212,255,.2),transparent);
+  opacity:0;transition:opacity .25s;
+}
+.btn:hover::before{opacity:1}
+.btn:hover{border-color:var(--border-bright);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,212,255,.15)}
+.btn i{font-size:14px;position:relative;z-index:1}
+.btn span{position:relative;z-index:1}
+.btn--primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#021219;border-color:transparent;font-weight:600;
+  box-shadow:0 0 24px rgba(0,212,255,.3);
+}
+.btn--primary::before{
+  background:linear-gradient(135deg,var(--accent-2),var(--accent));
+}
+.btn--primary:hover{box-shadow:0 8px 32px rgba(0,212,255,.5)}
+.btn--ghost{background:transparent}
+
+.hero__stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  max-width:560px;
+  padding-top:32px;border-top:1px solid var(--border);
+}
+.hero__stat{display:flex;flex-direction:column;gap:4px}
+.hero__stat-num{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:28px;font-weight:700;letter-spacing:-.02em;
+  color:var(--accent);
+}
+.hero__stat-label{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--text-mute);letter-spacing:.15em;text-transform:uppercase;
+}
+
+.hero__scroll{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--text-mute);letter-spacing:.2em;text-transform:uppercase;
+  z-index:3;
+}
+.hero__scroll-line{
+  width:1px;height:40px;
+  background:linear-gradient(180deg,transparent,var(--accent),transparent);
+  animation:scrollLine 2s infinite;
+}
+@keyframes scrollLine{
+  0%{transform:translateY(-20px);opacity:0}
+  50%{opacity:1}
+  100%{transform:translateY(20px);opacity:0}
+}
+
+.hero__corner{
+  position:absolute;font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--text-mute);letter-spacing:.15em;
+  z-index:3;
+}
+.hero__corner--tl{top:90px;left:40px}
+.hero__corner--tr{top:90px;right:40px;text-align:right}
+.hero__corner--br{bottom:30px;right:40px;text-align:right}
+.hero__corner span{color:var(--accent)}
+
+/* ============ ABOUT ============ */
+.about{padding-top:80px}
+.about__grid{
+  display:grid;grid-template-columns:1.4fr 1fr;gap:60px;align-items:start;
+}
+.about__text p{
+  font-size:17px;line-height:1.7;color:var(--text-dim);
+  margin-bottom:20px;
+}
+.about__text p strong{color:var(--text);font-weight:500}
+.about__text p:last-child{margin-bottom:0}
+.about__panel{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:28px;
+  backdrop-filter:blur(20px);
+  position:relative;
+  overflow:hidden;
+}
+.about__panel::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+}
+.about__panel-title{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--text-mute);letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:20px;display:flex;align-items:center;gap:10px;
+}
+.about__panel-title::after{
+  content:'';flex:1;height:1px;background:var(--border);
+}
+.about__list{display:flex;flex-direction:column;gap:14px}
+.about__list-item{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;
+}
+.about__list-item .label{color:var(--text-dim)}
+.about__list-item .value{
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--text);font-weight:500;
+}
+.about__list-item .value.accent{color:var(--accent)}
+
+/* ============ SKILLS ============ */
+.skills{position:relative}
+.skill-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:16px;
+}
+.skill-card{
+  position:relative;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  backdrop-filter:blur(10px);
+  transition:all .3s var(--ease);
+  overflow:hidden;
+}
+.skill-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,212,255,.12),transparent 50%);
+  opacity:0;transition:opacity .3s;
+  pointer-events:none;
+}
+.skill-card:hover::before{opacity:1}
+.skill-card:hover{
+  border-color:var(--border-bright);
+  transform:translateY(-4px);
+  box-shadow:0 12px 40px rgba(0,212,255,.12);
+}
+.skill-card__icon{
+  width:42px;height:42px;border-radius:10px;
+  background:rgba(0,212,255,.08);
+  border:1px solid rgba(0,212,255,.2);
+  display:grid;place-items:center;
+  font-size:18px;color:var(--accent);
+  margin-bottom:16px;
+  transition:all .3s;
+}
+.skill-card:hover .skill-card__icon{
+  background:rgba(0,212,255,.15);
+  box-shadow:0 0 20px rgba(0,212,255,.3);
+}
+.skill-card__title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:16px;font-weight:600;
+  margin-bottom:6px;
+}
+.skill-card__desc{
+  font-size:12px;color:var(--text-mute);line-height:1.5;
+  margin-bottom:14px;
+}
+.skill-card__bar{
+  height:3px;background:rgba(255,255,255,.05);border-radius:2px;
+  overflow:hidden;position:relative;
+}
+.skill-card__bar-fill{
+  height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  border-radius:2px;width:0;
+  transition:width 1.2s var(--ease);
+  box-shadow:0 0 8px rgba(0,212,255,.5);
+}
+.skill-card__meta{
+  display:flex;justify-content:space-between;
+  margin-top:8px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--text-mute);letter-spacing:.1em;
+}
+.skill-card__meta .lvl{color:var(--accent)}
+
+/* ============ TIMELINE ============ */
+.timeline{position:relative;padding-left:40px}
+.timeline::before{
+  content:'';position:absolute;left:11px;top:8px;bottom:8px;
+  width:1px;background:var(--border);
+}
+.timeline__line-progress{
+  position:absolute;left:11px;top:8px;
+  width:1px;background:linear-gradient(180deg,var(--accent),var(--accent-2));
+  height:0;
+  box-shadow:0 0 12px var(--accent);
+  transition:height .6s var(--ease);
+}
+.timeline__item{
+  position:relative;
+  padding-bottom:60px;
+  opacity:0;transform:translateY(30px);
+  transition:opacity .8s var(--ease),transform .8s var(--ease);
+}
+.timeline__item.in{opacity:1;transform:translateY(0)}
+.timeline__item:last-child{padding-bottom:0}
+.timeline__node{
+  position:absolute;left:-40px;top:4px;
+  width:24px;height:24px;border-radius:50%;
+  background:var(--bg);
+  border:1px solid var(--border);
+  display:grid;place-items:center;
+  transition:all .4s var(--ease);
+}
+.timeline__node::before{
+  content:'';width:8px;height:8px;border-radius:50%;
+  background:var(--text-mute);
+  transition:all .4s var(--ease);
+}
+.timeline__item.in .timeline__node{
+  border-color:var(--accent);
+  box-shadow:0 0 16px rgba(0,212,255,.4);
+}
+.timeline__item.in .timeline__node::before{
+  background:var(--accent);
+  box-shadow:0 0 8px var(--accent);
+}
+.timeline__date{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--accent);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:8px;display:flex;align-items:center;gap:10px;
+}
+.timeline__date .type{
+  padding:3px 8px;border-radius:4px;
+  background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);
+  color:var(--accent);font-size:9px;
+}
+.timeline__company{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:22px;font-weight:600;
+  margin-bottom:4px;letter-spacing:-.01em;
+}
+.timeline__role{
+  font-size:14px;color:var(--text-dim);margin-bottom:4px;
+}
+.timeline__location{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--text-mute);margin-bottom:16px;
+  display:flex;align-items:center;gap:6px;
+}
+.timeline__card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  backdrop-filter:blur(10px);
+  transition:border-color .3s;
+}
+.timeline__item:hover .timeline__card{border-color:var(--border-bright)}
+.timeline__card ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.timeline__card li{
+  font-size:14px;color:var(--text-dim);line-height:1.55;
+  padding-left:18px;position:relative;
+}
+.timeline__card li::before{
+  content:'';position:absolute;left:0;top:9px;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent);opacity:.6;
+}
+.timeline__tags{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:18px;
+  padding-top:18px;border-top:1px solid var(--border);
+}
+.timeline__tag{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  padding:4px 10px;border-radius:4px;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  color:var(--text-dim);letter-spacing:.05em;
+}
+
+/* ============ PROJECTS ============ */
+.project-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:24px;
+}
+.project-card{
+  position:relative;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:32px;
+  backdrop-filter:blur(10px);
+  transition:all .4s var(--ease);
+  overflow:hidden;
+  transform-style:preserve-3d;
+  perspective:1000px;
+}
+.project-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.project-card:hover::before{opacity:1}
+.project-card:hover{
+  border-color:var(--border-bright);
+  box-shadow:0 20px 60px rgba(0,212,255,.15);
+}
+.project-card__head{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  margin-bottom:20px;
+}
+.project-card__num{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--text-mute);letter-spacing:.15em;
+}
+.project-card__num .accent{color:var(--accent)}
+.project-card__icon{
+  width:56px;height:56px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(0,212,255,.12),rgba(77,142,255,.06));
+  border:1px solid rgba(0,212,255,.2);
+  display:grid;place-items:center;
+  font-size:22px;color:var(--accent);
+  position:relative;
+}
+.project-card__icon::after{
+  content:'';position:absolute;inset:-1px;border-radius:14px;
+  border:1px dashed rgba(0,212,255,.3);
+  opacity:.5;
+}
+.project-card__title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:24px;font-weight:600;
+  letter-spacing:-.015em;margin-bottom:10px;
+}
+.project-card__desc{
+  font-size:14px;color:var(--text-dim);line-height:1.6;
+  margin-bottom:20px;
+}
+.project-card__stack{
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;
+}
+.project-card__stack span{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  padding:4px 10px;border-radius:4px;
+  background:rgba(0,212,255,.06);
+  color:var(--accent);
+  border:1px solid rgba(0,212,255,.15);
+  letter-spacing:.05em;
+}
+.project-card__footer{
+  display:flex;gap:10px;padding-top:20px;
+  border-top:1px solid var(--border);
+}
+.project-card__btn{
+  flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:11px 16px;border-radius:9px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  letter-spacing:.05em;text-transform:uppercase;
+  text-decoration:none;color:var(--text);
+  border:1px solid var(--border);background:transparent;
+  transition:all .2s;
+}
+.project-card__btn:hover{
+  border-color:var(--border-bright);
+  background:rgba(0,212,255,.06);
+}
+.project-card__btn--primary{
+  background:rgba(0,212,255,.1);
+  border-color:rgba(0,212,255,.3);
+  color:var(--accent);
+}
+.project-card__btn--primary:hover{
+  background:rgba(0,212,255,.15);
+  box-shadow:0 0 16px rgba(0,212,255,.2);
+}
+
+/* ============ CERTIFICATIONS ============ */
+.cert-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:16px;
+}
+.cert-card{
+  position:relative;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px 24px;
+  backdrop-filter:blur(10px);
+  transition:all .3s var(--ease);
+  overflow:hidden;
+}
+.cert-card::before{
+  content:'';position:absolute;top:0;right:0;
+  width:80px;height:80px;
+  background:radial-gradient(circle at top right,rgba(0,212,255,.15),transparent 70%);
+  opacity:0;transition:opacity .3s;
+}
+.cert-card:hover::before{opacity:1}
+.cert-card:hover{
+  border-color:var(--border-bright);
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(0,212,255,.12);
+}
+.cert-card__badge{
+  width:48px;height:48px;
+  position:relative;
+  margin-bottom:18px;
+}
+.cert-card__badge svg{width:100%;height:100%}
+.cert-card__name{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:16px;font-weight:600;line-height:1.3;
+  margin-bottom:8px;
+}
+.cert-card__issuer{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:14px;
+}
+.cert-card__status{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--accent);letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 10px;border-radius:100px;
+  background:rgba(0,212,255,.08);
+  border:1px solid rgba(0,212,255,.2);
+}
+.cert-card__status .dot{
+  width:5px;height:5px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 6px var(--accent);
+}
+
+/* ============ EDUCATION ============ */
+.edu-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+}
+.edu-card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:32px;
+  backdrop-filter:blur(10px);
+  position:relative;overflow:hidden;
+  transition:all .3s;
+}
+.edu-card:hover{border-color:var(--border-bright)}
+.edu-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--accent),transparent);
+}
+.edu-card__period{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--accent);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.edu-card__institution{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:22px;font-weight:600;margin-bottom:8px;
+  letter-spacing:-.01em;
+}
+.edu-card__degree{
+  font-size:14px;color:var(--text-dim);margin-bottom:16px;
+}
+.edu-card__meta{
+  display:flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--text-mute);
+  padding-top:16px;border-top:1px solid var(--border);
+}
+.edu-card__meta i{color:var(--accent)}
+
+/* ============ CONTACT ============ */
+.contact{
+  position:relative;
+  text-align:center;
+  padding:140px 40px;
+}
+.contact__bg{
+  position:absolute;inset:0;z-index:0;
+  background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(0,212,255,.08),transparent 70%);
+}
+.contact__content{position:relative;z-index:1;max-width:760px;margin:0 auto}
+.contact__eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  color:var(--accent);letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:24px;
+  padding:8px 18px;border-radius:100px;
+  background:var(--panel);border:1px solid var(--border-bright);
+}
+.contact__title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(36px,5vw,64px);font-weight:700;
+  line-height:1.05;letter-spacing:-.03em;
+  margin-bottom:20px;
+}
+.contact__title .accent{
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.contact__sub{
+  font-size:17px;color:var(--text-dim);line-height:1.6;
+  margin-bottom:48px;max-width:560px;margin-left:auto;margin-right:auto;
+}
+.contact__methods{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
+  max-width:620px;margin:0 auto 32px;
+}
+.contact-method{
+  display:flex;align-items:center;gap:16px;
+  padding:20px;border-radius:var(--radius);
+  background:var(--panel);border:1px solid var(--border);
+  backdrop-filter:blur(10px);
+  text-decoration:none;color:var(--text);
+  transition:all .25s;
+  text-align:left;
+}
+.contact-method:hover{
+  border-color:var(--border-bright);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,212,255,.12);
+}
+.contact-method__icon{
+  width:42px;height:42px;border-radius:10px;
+  background:rgba(0,212,255,.08);
+  border:1px solid rgba(0,212,255,.2);
+  display:grid;place-items:center;
+  color:var(--accent);font-size:16px;flex-shrink:0;
+}
+.contact-method__text{display:flex;flex-direction:column;min-width:0}
+.contact-method__label{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--text-mute);letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:4px;
+}
+.contact-method__value{
+  font-size:14px;color:var(--text);font-weight:500;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.contact__cv{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:18px 32px;border-radius:12px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#021219;text-decoration:none;font-weight:600;
+  font-family:'JetBrains Mono',monospace;font-size:13px;
+  letter-spacing:.05em;text-transform:uppercase;
+  box-shadow:0 8px 32px rgba(0,212,255,.3);
+  transition:all .25s var(--ease);
+}
+.contact__cv:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(0,212,255,.5);
+}
+
+/* ============ FOOTER ============ */
+.footer{
+  padding:40px;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--text-mute);letter-spacing:.1em;
+  flex-wrap:wrap;gap:20px;
+}
+.footer__links{display:flex;gap:24px}
+.footer__links a{color:var(--text-mute);text-decoration:none;transition:color .2s}
+.footer__links a:hover{color:var(--accent)}
+
+/* ============ REVEAL ============ */
+.reveal{
+  opacity:0;transform:translateY(40px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* ============ MOBILE MENU ============ */
+.mobile-menu{
+  position:fixed;inset:0;z-index:99;
+  background:rgba(5,8,16,.95);
+  backdrop-filter:blur(20px);
+  display:none;
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:30px;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:28px;font-weight:600;color:var(--text);
+  text-decoration:none;
+}
+.mobile-menu a:hover{color:var(--accent)}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1024px){
+  .hero__content{grid-template-columns:1fr;gap:40px}
+  .hero__left{max-width:100%}
+  #core-canvas{opacity:.5}
+  .about__grid{grid-template-columns:1fr;gap:40px}
+  .nav__links{display:none}
+  .nav__menu-btn{display:block}
+  .nav__status{display:none}
+  .hero__corner{display:none}
+}
+@media(max-width:768px){
+  section{padding:80px 0}
+  .container{padding:0 24px}
+  .nav{padding:16px 24px}
+  .nav.scrolled{padding:12px 24px}
+  .hero{padding:120px 24px 60px}
+  .hero__stats{grid-template-columns:repeat(3,1fr);gap:12px}
+  .hero__stat-num{font-size:22px}
+  .project-grid{grid-template-columns:1fr}
+  .edu-grid{grid-template-columns:1fr}
+  .contact__methods{grid-template-columns:1fr}
+  .contact{padding:100px 24px}
+  .footer{flex-direction:column;text-align:center;padding:30px 24px}
+  .timeline{padding-left:32px}
+  .timeline__node{left:-32px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- Scroll Progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <a href="#hero" class="nav__logo">
+    <div class="nav__logo-mark">OG</div>
+    <div class="nav__logo-text">
+      <span>O'Brian Griffith</span>
+      <small>Technology Professional</small>
+    </div>
+  </a>
+  <div class="nav__links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#certifications">Certs</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav__status">
+    <span class="dot"></span>
+    <span>Available</span>
+  </div>
+  <button class="nav__menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#experience">Experience</a>
+  <a href="#projects">Projects</a>
+  <a href="#certifications">Certifications</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero__bg">
+    <canvas id="core-canvas"></canvas>
+  </div>
+  <div class="hero__grid-overlay"></div>
+
+  <div class="hero__corner hero__corner--tl">
+    <div>LAT <span>13.1939° N</span></div>
+    <div>LON <span>59.5432° W</span></div>
+  </div>
+  <div class="hero__corner hero__corner--tr">
+    <div>SYS <span>ONLINE</span></div>
+    <div>CLEARANCE <span>SEC+</span></div>
+  </div>
+  <div class="hero__corner hero__corner--br">
+    <div>v2.4.1 · BUILD 2025.11</div>
+  </div>
+
+  <div class="hero__content">
+    <div class="hero__left">
+      <div class="hero__eyebrow">
+        <span class="dot"></span>
+        <span>TECHNOLOGY PROFESSIONAL</span>
+        <span class="sep">/</span>
+        <span>BARBADOS</span>
+      </div>
+
+      <h1 class="hero__name">
+        <span class="line">O'Brian</span>
+        <span class="line accent">Griffith.</span>
+      </h1>
+
+      <div class="hero__headline">
+        <span class="pill">AI Analyst</span>
+        <span class="sep">·</span>
+        <span class="pill">Cybersecurity</span>
+        <span class="sep">·</span>
+        <span class="pill">Data</span>
+        <span class="sep">·</span>
+        <span class="pill">IT Support</span>
+      </div>
+
+      <p class="hero__message">
+        Building <strong>secure, intelligent, and practical</strong> technology solutions through AI, data, cybersecurity, and software. CompTIA Security+ certified, hands-on across data engineering, server support, and applied machine learning workflows.
+      </p>
+
+      <div class="hero__cta">
+        <a href="#projects" class="btn btn--primary">
+          <i class="fas fa-cube"></i>
+          <span>View Projects</span>
+        </a>
+        <a href="profile (1).pdf" download="O'Brian_Griffith_CV.pdf" class="btn">
+          <i class="fas fa-file-arrow-down"></i>
+          <span>Download CV</span>
+        </a>
+        <a href="https://github.com/Griff-OB" target="_blank" rel="noopener" class="btn btn--ghost">
+          <i class="fab fa-github"></i>
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/o-brian-griffith-645972353" target="_blank" rel="noopener" class="btn btn--ghost">
+          <i class="fab fa-linkedin-in"></i>
+          <span>LinkedIn</span>
+        </a>
+      </div>
+
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <div class="hero__stat-num">3+</div>
+          <div class="hero__stat-label">Roles</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-num">6</div>
+          <div class="hero__stat-label">Certifications</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-num">12+</div>
+          <div class="hero__stat-label">Core Skills</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero__right"></div>
+  </div>
+
+  <div class="hero__scroll">
+    <span>SCROLL</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="section__header reveal">
+      <div class="section__eyebrow">01 — About</div>
+      <h2 class="section__title">An early-career technologist <span class="dim">building across</span> <span class="accent">AI, data, security, and infrastructure.</span></h2>
+    </div>
+
+    <div class="about__grid">
+      <div class="about__text reveal">
+        <p>
+          I'm an early-career technology professional with a foundation in <strong>computer science, cybersecurity, IT support, data analysis, and artificial intelligence</strong>. My work spans data cleaning and preprocessing for AI workflows, server and hardware support in production government environments, and software contributions that have processed real-world student placement data.
+        </p>
+        <p>
+          At <strong>Protexxa</strong>, I prepared and validated large datasets for AI and cybersecurity analysis — identifying duplicates, inconsistencies, and invalid records to improve dataset reliability. At the <strong>Ministry of Education and Human Resource Development, Barbados</strong>, I supported server maintenance, hardware troubleshooting, and contributed to a Common Entrance Exam results-processing tool. At the <strong>Ministry of Innovation, Science and Technology (M.I.S.T)</strong>, I gained foundational exposure to government IT operations and digital systems.
+        </p>
+        <p>
+          I hold an <strong>Associate Degree in Computer Science</strong> from Barbados Community College, a <strong>CompTIA Security+</strong> certification, and a stack of AI/data credentials. I'm currently seeking opportunities in cybersecurity, IT support, SOC analysis, data analysis, and junior technology roles where I can apply my technical foundation and keep learning.
+        </p>
+      </div>
+
+      <div class="about__panel reveal reveal-delay-1">
+        <div class="about__panel-title">Operator Profile</div>
+        <div class="about__list">
+          <div class="about__list-item">
+            <span class="label">Location</span>
+            <span class="value">Saint Michael, BB</span>
+          </div>
+          <div class="about__list-item">
+            <span class="label">Discipline</span>
+            <span class="value">CS · Cybersecurity</span>
+          </div>
+          <div class="about__list-item">
+            <span class="label">Status</span>
+            <span class="value accent">Open to work</span>
+          </div>
+          <div class="about__list-item">
+            <span class="label">Target roles</span>
+            <span class="value">SOC · IT · Data</span>
+          </div>
+          <div class="about__list-item">
+            <span class="label">Core cert</span>
+            <span class="value accent">CompTIA Sec+</span>
+          </div>
+          <div class="about__list-item">
+            <span class="label">Education</span>
+            <span class="value">BCC · CS Associate</span>
+          </div>
+          <div class="about__list-item">
+            <span class="label">Languages</span>
+            <span class="value">Python · SQL</span>
+          </div>
+          <div class="about__list-item">
+            <span class="label">Experience</span>
+            <span class="value">~2 years</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="skills" id="skills">
+  <div class="container">
+    <div class="section__header reveal">
+      <div class="section__eyebrow">02 — Technical Stack</div>
+      <h2 class="section__title">Core skills across <span class="accent">data, security, infrastructure,</span> <span class="dim">and software.</span></h2>
+      <p class="section__sub">A hands-on toolkit built through professional roles, certifications, and project work — from cleaning structured datasets to supporting live server environments.</p>
+    </div>
+
+    <div class="skill-grid" id="skillGrid">
+      <!-- skill cards injected via JS for cleaner markup -->
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="experience" id="experience">
+  <div class="container">
+    <div class="section__header reveal">
+      <div class="section__eyebrow">03 — Experience</div>
+      <h2 class="section__title">A track record across <span class="accent">AI, government IT,</span> <span class="dim">and digital systems.</span></h2>
+      <p class="section__sub">Three professional engagements — each one building on the last, expanding from data and AI work into infrastructure, server support, and applied software development.</p>
+    </div>
+
+    <div class="timeline" id="timeline">
+      <div class="timeline__line-progress" id="timelineProgress"></div>
+
+      <div class="timeline__item">
+        <div class="timeline__node"></div>
+        <div class="timeline__date">
+          <span>Sep 2024 — Sep 2025 · 1 yr 1 mo</span>
+          <span class="type">AI / Data</span>
+        </div>
+        <div class="timeline__company">Protexxa</div>
+        <div class="timeline__role">AI Analyst · Data Cleaning & Cybersecurity Data Support</div>
+        <div class="timeline__location"><i class="fas fa-map-marker-alt"></i> Barbados</div>
+        <div class="timeline__card">
+          <ul>
+            <li>Cleaned, organized, and prepared large datasets for analysis and cybersecurity-related workflows.</li>
+            <li>Supported data engineering tasks — preprocessing, formatting, validation, and transformation of structured information.</li>
+            <li>Improved dataset quality by identifying inaccurate, incomplete, duplicate, invalid, and inconsistent records.</li>
+            <li>Worked with cybersecurity-related data to support safer, more reliable, and more useful datasets for analysis.</li>
+            <li>Applied technical problem-solving to AI, data, and automation-related project work in a professional environment.</li>
+          </ul>
+          <div class="timeline__tags">
+            <span class="timeline__tag">Data Cleaning</span>
+            <span class="timeline__tag">Preprocessing</span>
+            <span class="timeline__tag">Data Analysis</span>
+            <span class="timeline__tag">Python</span>
+            <span class="timeline__tag">SQL</span>
+            <span class="timeline__tag">Cybersecurity</span>
+            <span class="timeline__tag">AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline__item">
+        <div class="timeline__node"></div>
+        <div class="timeline__date">
+          <span>Mar 2025 — Aug 2025 · 6 months</span>
+          <span class="type">IT / Server</span>
+        </div>
+        <div class="timeline__company">Ministry of Education and Human Resource Development, Barbados</div>
+        <div class="timeline__role">IT Intern · Server Support & Technical Support</div>
+        <div class="timeline__location"><i class="fas fa-map-marker-alt"></i> Elsie Payne Complex, Constitution Road, St. Michael</div>
+        <div class="timeline__card">
+          <ul>
+            <li>Assisted with server support and day-to-day system maintenance to keep internal technology services running reliably.</li>
+            <li>Provided technical support for computers, printers, and IT equipment used by staff across the ministry.</li>
+            <li>Troubleshot hardware and software issues, including computer maintenance and system setup tasks.</li>
+            <li>Contributed to development of a program processing Common Entrance Exam results and school placement based on performance.</li>
+            <li>Gained hands-on infrastructure, user support, and education-technology experience in a government environment.</li>
+          </ul>
+          <div class="timeline__tags">
+            <span class="timeline__tag">Server Support</span>
+            <span class="timeline__tag">Hardware Troubleshooting</span>
+            <span class="timeline__tag">Technical Support</span>
+            <span class="timeline__tag">Software Development</span>
+            <span class="timeline__tag">IT Operations</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline__item">
+        <div class="timeline__node"></div>
+        <div class="timeline__date">
+          <span>Jul 2024 — Nov 2024 · 5 months</span>
+          <span class="type">Internship</span>
+        </div>
+        <div class="timeline__company">Ministry of Innovation, Science and Technology (M.I.S.T)</div>
+        <div class="timeline__role">Technology Intern · IT & Digital Systems Support</div>
+        <div class="timeline__location"><i class="fas fa-map-marker-alt"></i> Highway 2, Saint Michael, Barbados</div>
+        <div class="timeline__card">
+          <ul>
+            <li>Supported technology-related tasks across IT, digital systems, and administrative technology environments.</li>
+            <li>Gained exposure to professional IT operations, technical support processes, and workplace technology standards.</li>
+            <li>Assisted with digital systems work while learning how government technology departments support internal users.</li>
+            <li>Developed practical experience in communication, teamwork, troubleshooting, documentation, and professional problem-solving.</li>
+            <li>Strengthened understanding of how IT, digital transformation, cybersecurity, and project execution connect in practice.</li>
+          </ul>
+          <div class="timeline__tags">
+            <span class="timeline__tag">IT Operations</span>
+            <span class="timeline__tag">Digital Systems</span>
+            <span class="timeline__tag">Documentation</span>
+            <span class="timeline__tag">Teamwork</span>
+            <span class="timeline__tag">Troubleshooting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="section__header reveal">
+      <div class="section__eyebrow">04 — Selected Projects</div>
+      <h2 class="section__title">Applied work across <span class="accent">data tooling, mobile apps,</span> <span class="dim">and system utilities.</span></h2>
+      <p class="section__sub">Each project solves a concrete problem — from wrangling messy datasets to tuning Windows systems for performance. Built with Python, SQL, Kotlin, and modern web tooling.</p>
+    </div>
+
+    <div class="project-grid" id="projectGrid">
+
+      <article class="project-card tilt-card reveal">
+        <div class="project-card__head">
+          <div class="project-card__num"><span class="accent">P01</span> / DATA TOOL</div>
+          <div class="project-card__icon"><i class="fas fa-broom"></i></div>
+        </div>
+        <h3 class="project-card__title">Data Cleaning / Wrangler Tool</h3>
+        <p class="project-card__desc">A Python-based pipeline for cleaning and preprocessing messy datasets — handling duplicates, missing values, format inconsistencies, and validation. Built from real patterns encountered in AI analyst work at Protexxa.</p>
+        <div class="project-card__stack">
+          <span>Python</span><span>Pandas</span><span>NumPy</span><span>Regex</span>
+        </div>
+        <div class="project-card__footer">
+          <a href="https://github.com/Griff-OB" target="_blank" rel="noopener" class="project-card__btn">
+            <i class="fab fa-github"></i> Code
+          </a>
+          <a href="https://github.com/Griff-OB" target="_blank" rel="noopener" class="project-card__btn project-card__btn--primary">
+            <i class="fas fa-arrow-right"></i> Details
+          </a>
+        </div>
+      </article>
+
+      <article class="project-card tilt-card reveal reveal-delay-1">
+        <div class="project-card__head">
+          <div class="project-card__num"><span class="accent">P02</span> / MOBILE APP</div>
+          <div class="project-card__icon"><i class="fas fa-mobile-screen-button"></i></div>
+        </div>
+        <h3 class="project-card__title">PunchList Pocket</h3>
+        <p class="project-card__desc">An Android app for tracking construction punch-list items in the field — built to digitize site walkthroughs, capture issues with photos, and sync status across teams. Designed for offline-first use.</p>
+        <div class="project-card__stack">
+          <span>Kotlin</span><span>Android</span><span>Room DB</span><span>Material 3</span>
+        </div>
+        <div class="project-card__footer">
+          <a href="https://github.com/Griff-OB" target="_blank" rel="noopener" class="project-card__btn">
+            <i class="fab fa-github"></i> Code
+          </a>
+          <a href="https://github.com/Griff-OB" target="_blank" rel="noopener" class="project-card__btn project-card__btn--primary">
+            <i class="fas fa-arrow-right"></i> Details
+          </a>
+        </div>
+      </article>
+
+      <article class="project-card tilt-card reveal reveal-delay-2">
+        <div class="project-card__head">
+          <div class="project-card__num"><span class="accent">P03</span> / SYSTEM UTILITY</div>
+          <div class="project-card__icon"><i class="fas fa-microchip"></i></div>
+        </div>
+        <h3 class="project-card__title">PC Tune Toolkit</h3>
+        <p class="project-card__desc">A Windows utility for diagnosing and tuning system performance — clearing temp files, managing startup items, checking service health, and surfacing hardware info. Built to support IT support workflows.</p>
+        <div class="project-card__stack">
+          <span>Python</span><span>PowerShell</span><span>Win32 API</span><span>PyQt</span>
+        </div>
+        <div class="project-card__footer">
+          <a href="https://github.com/Griff-OB/PC-Tune-Toolkit" target="_blank" rel="noopener" class="project-card__btn">
+            <i class="fab fa-github"></i> Code
+          </a>
+          <a href="https://github.com/Griff-OB/PC-Tune-Toolkit" target="_blank" rel="noopener" class="project-card__btn project-card__btn--primary">
+            <i class="fas fa-arrow-right"></i> Details
+          </a>
+        </div>
+      </article>
+
+      <article class="project-card tilt-card reveal reveal-delay-3">
+        <div class="project-card__head">
+          <div class="project-card__num"><span class="accent">P04</span> / WEB</div>
+          <div class="project-card__icon"><i class="fas fa-globe"></i></div>
+        </div>
+        <h3 class="project-card__title">Portfolio Website</h3>
+        <p class="project-card__desc">This site — a futuristic, single-page CV built with semantic HTML, modern CSS, Three.js for the 3D AI core, and vanilla JS for interactions. Designed and engineered from scratch as a personal brand surface.</p>
+        <div class="project-card__stack">
+          <span>HTML5</span><span>CSS3</span><span>Three.js</span><span>Vanilla JS</span>
+        </div>
+        <div class="project-card__footer">
+          <a href="https://github.com/Griff-OB" target="_blank" rel="noopener" class="project-card__btn">
+            <i class="fab fa-github"></i> Code
+          </a>
+          <a href="#hero" class="project-card__btn project-card__btn--primary">
+            <i class="fas fa-arrow-up"></i> Live
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- Certifications -->
+<section class="certifications" id="certifications">
+  <div class="container">
+    <div class="section__header reveal">
+      <div class="section__eyebrow">05 — Certifications</div>
+      <h2 class="section__title">Verified credentials across <span class="accent">security, AI, and data.</span></h2>
+      <p class="section__sub">A combination of foundational cybersecurity certification and modern AI/data credentials — building a cross-disciplinary base for SOC, data, and junior tech roles.</p>
+    </div>
+
+    <div class="cert-grid" id="certGrid">
+      <!-- certs injected via JS -->
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="education" id="education">
+  <div class="container">
+    <div class="section__header reveal">
+      <div class="section__eyebrow">06 — Education</div>
+      <h2 class="section__title">Formal training in <span class="accent">computer science</span> <span class="dim">and STEM foundations.</span></h2>
+    </div>
+
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-card__period">Sep 2021 — Jul 2024</div>
+        <div class="edu-card__institution">Barbados Community College</div>
+        <div class="edu-card__degree">Associate Degree · Computer Science</div>
+        <div class="edu-card__meta">
+          <i class="fas fa-graduation-cap"></i>
+          <span>CS coursework · Programming · Data · Systems</span>
+        </div>
+      </div>
+
+      <div class="edu-card reveal reveal-delay-1">
+        <div class="edu-card__period">Sep 2017 — Jul 2021</div>
+        <div class="edu-card__institution">Queen's College Barbados</div>
+        <div class="edu-card__degree">Secondary Education</div>
+        <div class="edu-card__meta">
+          <i class="fas fa-school"></i>
+          <span>STEM foundations · Mathematics · Sciences</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="contact__bg"></div>
+  <div class="contact__content">
+    <div class="contact__eyebrow reveal">
+      <span>07 — Contact</span>
+    </div>
+    <h2 class="contact__title reveal">
+      Interested in hiring me,<br>
+      collaborating, or <span class="accent">viewing my work?</span>
+    </h2>
+    <p class="contact__sub reveal reveal-delay-1">
+      Open to opportunities in cybersecurity, IT support, SOC analysis, data analysis, and junior technology roles. Available remotely from Barbados or on-island — let's talk.
+    </p>
+
+    <div class="contact__methods reveal reveal-delay-2">
+      <a href="mailto:obrian.n.griffith@gmail.com" class="contact-method">
+        <div class="contact-method__icon"><i class="fas fa-envelope"></i></div>
+        <div class="contact-method__text">
+          <div class="contact-method__label">Email</div>
+          <div class="contact-method__value">obrian.n.griffith@gmail.com</div>
+        </div>
+      </a>
+      <a href="tel:+12462484016" class="contact-method">
+        <div class="contact-method__icon"><i class="fas fa-phone"></i></div>
+        <div class="contact-method__text">
+          <div class="contact-method__label">Mobile</div>
+          <div class="contact-method__value">+1 (246) 248-4016</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/o-brian-griffith-645972353" target="_blank" rel="noopener" class="contact-method">
+        <div class="contact-method__icon"><i class="fab fa-linkedin-in"></i></div>
+        <div class="contact-method__text">
+          <div class="contact-method__label">LinkedIn</div>
+          <div class="contact-method__value">/o-brian-griffith</div>
+        </div>
+      </a>
+      <a href="https://github.com/Griff-OB" target="_blank" rel="noopener" class="contact-method">
+        <div class="contact-method__icon"><i class="fab fa-github"></i></div>
+        <div class="contact-method__text">
+          <div class="contact-method__label">GitHub</div>
+          <div class="contact-method__value">github.com/Griff-OB</div>
+        </div>
+      </a>
+    </div>
+
+    <a href="profile (1).pdf" download="O'Brian_Griffith_CV.pdf" class="contact__cv reveal reveal-delay-3">
+      <i class="fas fa-file-arrow-down"></i>
+      <span>Download Full CV</span>
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div>© 2025 O'Brian Griffith · Saint Michael, Barbados</div>
+  <div class="footer__links">
+    <a href="https://github.com/Griff-OB" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/o-brian-griffith-645972353" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:obrian.n.griffith@gmail.com">Email</a>
+  </div>
+  <div>Designed & built by OG · v2.4.1</div>
+</footer>
+
+<!-- Three.js importmap -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+
+/* ============ SKILLS DATA ============ */
+const skills = [
+  { icon:'fa-shield-halved', title:'Cybersecurity', desc:'CompTIA Security+ foundation. Threat-aware data handling.', lvl:85 },
+  { icon:'fa-screwdriver-wrench', title:'IT Support', desc:'Hardware, printers, end-user support in production environments.', lvl:88 },
+  { icon:'fa-broom', title:'Data Cleaning', desc:'Duplicates, invalid records, formatting, validation at scale.', lvl:90 },
+  { icon:'fa-chart-line', title:'Data Analysis', desc:'Structured analysis, preprocessing, transformation pipelines.', lvl:85 },
+  { icon:'fa-database', title:'Data Engineering', desc:'Formatting, validation, structured dataset preparation.', lvl:78 },
+  { icon:'fa-python', title:'Python', desc:'Automation, data wrangling, scripting, tool building.', lvl:82 },
+  { icon:'fa-database', title:'SQL', desc:'Queries, structured data access, dataset operations.', lvl:78 },
+  { icon:'fa-gears', title:'Automation', desc:'Workflow automation, system utilities, scripted operations.', lvl:80 },
+  { icon:'fa-brain', title:'Artificial Intelligence', desc:'AI data workflows, dataset prep for ML, fundamentals.', lvl:80 },
+  { icon:'fa-wrench', title:'Troubleshooting', desc:'Hardware, software, server and system-level diagnosis.', lvl:87 },
+  { icon:'fa-comments', title:'Technical Communication', desc:'Documentation, team coordination, user-facing support.', lvl:84 },
+  { icon:'fa-code', title:'Software Dev Fundamentals', desc:'Project contributions, structured programming, version control.', lvl:78 },
+];
+
+const skillGrid = document.getElementById('skillGrid');
+skills.forEach((s,i)=>{
+  const card = document.createElement('div');
+  card.className = 'skill-card reveal';
+  if(i%3===1) card.classList.add('reveal-delay-1');
+  if(i%3===2) card.classList.add('reveal-delay-2');
+  card.innerHTML = `
+    <div class="skill-card__icon"><i class="fas ${s.icon}"></i></div>
+    <div class="skill-card__title">${s.title}</div>
+    <div class="skill-card__desc">${s.desc}</div>
+    <div class="skill-card__bar"><div class="skill-card__bar-fill" data-lvl="${s.lvl}"></div></div>
+    <div class="skill-card__meta">
+      <span>PROFICIENCY</span>
+      <span class="lvl">${s.lvl}%</span>
+    </div>
+  `;
+  card.addEventListener('mousemove',(e)=>{
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX-r.left)/r.width*100)+'%');
+    card.style.setProperty('--my', ((e.clientY-r.top)/r.height*100)+'%');
+  });
+  skillGrid.appendChild(card);
+});
+
+/* ============ CERTIFICATIONS DATA ============ */
+const certs = [
+  { name:'CompTIA Security+', issuer:'CompTIA', primary:true },
+  { name:'Data Engineer Associate', issuer:'DataCamp', primary:true },
+  { name:'AI for Data Analysis', issuer:'AI Fundamentals Track' },
+  { name:'AI Fundamentals', issuer:'AI Track' },
+  { name:'Data Literacy', issuer:'Data Track' },
+  { name:'Introduction to Robotics', issuer:'Robotics Track' },
+];
+
+const certGrid = document.getElementById('certGrid');
+certs.forEach((c,i)=>{
+  const card = document.createElement('div');
+  card.className = 'cert-card reveal';
+  if(i%3===1) card.classList.add('reveal-delay-1');
+  if(i%3===2) card.classList.add('reveal-delay-2');
+  card.innerHTML = `
+    <div class="cert-card__badge">
+      <svg viewBox="0 0 48 48" fill="none">
+        <defs>
+          <linearGradient id="cg${i}" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#00d4ff"/>
+            <stop offset="100%" stop-color="#4d8eff"/>
+          </linearGradient>
+        </defs>
+        <path d="M24 3 L42 11 V25 C42 35 34 42 24 45 C14 42 6 35 6 25 V11 Z" 
+              stroke="url(#cg${i})" stroke-width="1.5" fill="rgba(0,212,255,0.05)"/>
+        <path d="M16 24 L21 29 L32 18" stroke="url(#cg${i})" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+    <div class="cert-card__name">${c.name}</div>
+    <div class="cert-card__issuer">${c.issuer}</div>
+    <div class="cert-card__status">
+      <span class="dot"></span>
+      <span>${c.primary ? 'Certified' : 'Completed'}</span>
+    </div>
+  `;
+  certGrid.appendChild(card);
+});
+
+/* ============ THREE.JS AI CORE ============ */
+const canvas = document.getElementById('core-canvas');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+camera.position.set(0, 0, 6);
+
+// Group container so we can rotate everything together
+const coreGroup = new THREE.Group();
+scene.add(coreGroup);
+
+// Outer wireframe icosahedron
+const outerGeo = new THREE.IcosahedronGeometry(1.5, 1);
+const outerMat = new THREE.MeshBasicMaterial({
+  color:0x00d4ff, wireframe:true, transparent:true, opacity:0.45
+});
+const outer = new THREE.Mesh(outerGeo, outerMat);
+coreGroup.add(outer);
+
+// Inner solid icosahedron (low opacity for depth)
+const innerGeo = new THREE.IcosahedronGeometry(1.0, 0);
+const innerMat = new THREE.MeshBasicMaterial({
+  color:0x00d4ff, transparent:true, opacity:0.08, side:THREE.DoubleSide
+});
+const inner = new THREE.Mesh(innerGeo, innerMat);
+coreGroup.add(inner);
+
+// Glowing core sphere
+const coreGeo = new THREE.SphereGeometry(0.45, 32, 32);
+const coreMat = new THREE.MeshBasicMaterial({
+  color:0x00d4ff, transparent:true, opacity:0.5
+});
+const core = new THREE.Mesh(coreGeo, coreMat);
+coreGroup.add(core);
+
+// Outer glow halo (larger transparent sphere)
+const haloGeo = new THREE.SphereGeometry(0.7, 32, 32);
+const haloMat = new THREE.MeshBasicMaterial({
+  color:0x4d8eff, transparent:true, opacity:0.12
+});
+const halo = new THREE.Mesh(haloGeo, haloMat);
+coreGroup.add(halo);
+
+// Vertex nodes — bright dots at certain vertices
+const nodePositions = outerGeo.attributes.position;
+const nodeGeo = new THREE.BufferGeometry();
+const uniqueVerts = [];
+const seen = new Set();
+for(let i=0;i<nodePositions.count;i++){
+  const x = nodePositions.getX(i);
+  const y = nodePositions.getY(i);
+  const z = nodePositions.getZ(i);
+  const key = `${x.toFixed(3)}_${y.toFixed(3)}_${z.toFixed(3)}`;
+  if(!seen.has(key)){
+    seen.add(key);
+    uniqueVerts.push(x,y,z);
+  }
+}
+nodeGeo.setAttribute('position', new THREE.Float32BufferAttribute(uniqueVerts, 3));
+const nodeMat = new THREE.PointsMaterial({
+  color:0xffffff, size:0.08, transparent:true, opacity:0.9,
+  blending:THREE.AdditiveBlending, sizeAttenuation:true
+});
+const nodes = new THREE.Points(nodeGeo, nodeMat);
+coreGroup.add(nodes);
+
+// Orbiting rings
+const rings = [];
+const ringConfigs = [
+  { radius:1.9, color:0x00d4ff, opacity:0.5, tilt:[Math.PI/2, 0, 0] },
+  { radius:2.2, color:0x4d8eff, opacity:0.4, tilt:[Math.PI/3, Math.PI/4, 0] },
+  { radius:2.5, color:0xb85cff, opacity:0.3, tilt:[Math.PI/4, 0, Math.PI/3] },
+];
+ringConfigs.forEach(cfg=>{
+  const ringGeo = new THREE.TorusGeometry(Math.max(0.1, cfg.radius), 0.008, 16, 128);
+  const ringMat = new THREE.MeshBasicMaterial({
+    color:cfg.color, transparent:true, opacity:cfg.opacity
+  });
+  const ring = new THREE.Mesh(ringGeo, ringMat);
+  ring.rotation.set(...cfg.tilt);
+  coreGroup.add(ring);
+  rings.push(ring);
+});
+
+// Particle field surrounding the core
+const particleCount = 900;
+const pGeo = new THREE.BufferGeometry();
+const pPositions = new Float32Array(particleCount * 3);
+const pColors = new Float32Array(particleCount * 3);
+const pSizes = new Float32Array(particleCount);
+const c1 = new THREE.Color(0x00d4ff);
+const c2 = new THREE.Color(0x4d8eff);
+const c3 = new THREE.Color(0xb85cff);
+for(let i=0;i<particleCount;i++){
+  const r = 2.5 + Math.random() * 3.5;
+  const theta = Math.random() * Math.PI * 2;
+  const phi = Math.acos(2 * Math.random() - 1);
+  pPositions[i*3]   = r * Math.sin(phi) * Math.cos(theta);
+  pPositions[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+  pPositions[i*3+2] = r * Math.cos(phi);
+  const choice = Math.random();
+  const c = choice < 0.6 ? c1 : (choice < 0.9 ? c2 : c3);
+  pColors[i*3]   = c.r;
+  pColors[i*3+1] = c.g;
+  pColors[i*3+2] = c.b;
+  pSizes[i] = Math.random() * 0.04 + 0.01;
+}
+pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+pGeo.setAttribute('color', new THREE.BufferAttribute(pColors, 3));
+pGeo.setAttribute('size', new THREE.BufferAttribute(pSizes, 1));
+
+const pMat = new THREE.PointsMaterial({
+  size:0.04, vertexColors:true, transparent:true, opacity:0.7,
+  blending:THREE.AdditiveBlending, sizeAttenuation:true, depthWrite:false
+});
+const particles = new THREE.Points(pGeo, pMat);
+scene.add(particles);
+
+// Interaction — drag to rotate
+let isDragging = false;
+let prev = { x:0, y:0 };
+let velocity = { x:0, y:0 };
+let target = { x:0, y:0 };
+let autoRotateActive = true;
+
+canvas.addEventListener('pointerdown', (e)=>{
+  isDragging = true;
+  autoRotateActive = false;
+  prev.x = e.clientX;
+  prev.y = e.clientY;
+  canvas.style.cursor = 'grabbing';
+});
+window.addEventListener('pointerup', ()=>{
+  isDragging = false;
+  canvas.style.cursor = 'grab';
+  setTimeout(()=>{ if(!isDragging) autoRotateActive = true; }, 2000);
+});
+window.addEventListener('pointermove', (e)=>{
+  if(!isDragging) return;
+  const dx = e.clientX - prev.x;
+  const dy = e.clientY - prev.y;
+  target.y += dx * 0.006;
+  target.x += dy * 0.006;
+  velocity.y = dx * 0.006;
+  velocity.x = dy * 0.006;
+  prev.x = e.clientX;
+  prev.y = e.clientY;
+});
+canvas.style.cursor = 'grab';
+
+// Mouse parallax (subtle camera shift based on mouse position)
+let mouseParallax = { x:0, y:0 };
+window.addEventListener('mousemove', (e)=>{
+  mouseParallax.x = (e.clientX / window.innerWidth - 0.5) * 0.3;
+  mouseParallax.y = (e.clientY / window.innerHeight - 0.5) * 0.3;
+});
+
+// Resize
+function resize(){
+  const rect = canvas.getBoundingClientRect();
+  const w = Math.max(1, rect.width);
+  const h = Math.max(1, rect.height);
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+resize();
+window.addEventListener('resize', resize);
+const ro = new ResizeObserver(resize);
+ro.observe(canvas.parentElement);
+
+// Animation loop
+let t = 0;
+let visible = true;
+const heroEl = document.getElementById('hero');
+const io = new IntersectionObserver(([entry])=>{
+  visible = entry.isIntersecting;
+}, { threshold:0.05 });
+io.observe(heroEl);
+
+// Animation logic
+function animate(){
+  requestAnimationFrame(animate);
+  if(!visible) return;
+  t += 0.01;
+
+  // Auto-rotation
+  if(autoRotateActive && !reduceMotion){
+    target.y += 0.0025;
+    target.x += 0.0008;
+  }
+
+  // Apply rotation with damping
+  coreGroup.rotation.x += (target.x - coreGroup.rotation.x) * 0.06;
+  coreGroup.rotation.y += (target.y - coreGroup.rotation.y) * 0.06;
+
+  // Ring independent rotation
+  if(!reduceMotion){
+    rings[0].rotation.z += 0.004;
+    rings[1].rotation.z -= 0.003;
+    rings[2].rotation.z += 0.002;
+    rings[1].rotation.x += 0.001;
+  }
+
+  // Pulsing core
+  const pulse = Math.sin(t * 2) * 0.5 + 0.5;
+  core.scale.setScalar(1 + pulse * 0.1);
+  halo.scale.setScalar(1 + pulse * 0.15);
+  halo.material.opacity = 0.08 + pulse * 0.06;
+
+  // Particle rotation
+  if(!reduceMotion){
+    particles.rotation.y += 0.0006;
+    particles.rotation.x += 0.0002;
+  }
+
+  // Camera parallax
+  camera.position.x += (mouseParallax.x - camera.position.x) * 0.04;
+  camera.position.y += (-mouseParallax.y - camera.position.y) * 0.04;
+  camera.lookAt(0, 0, 0);
+
+  renderer.render(scene, camera);
+}
+animate();
+
+/* ============ NAV SCROLL ============ */
+const nav = document.getElementById('nav');
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', ()=>{
+  if(window.scrollY > 30) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = (window.scrollY / total) * 100;
+  scrollProgress.style.width = pct + '%';
+});
+
+/* ============ MOBILE MENU ============ */
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', ()=>{
+  mobileMenu.classList.toggle('open');
+  const icon = menuBtn.querySelector('i');
+  icon.className = mobileMenu.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+});
+mobileMenu.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click', ()=>{
+    mobileMenu.classList.remove('open');
+    menuBtn.querySelector('i').className = 'fas fa-bars';
+  });
+});
+
+/* ============ REVEAL ON SCROLL ============ */
+const revealIO = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      // Animate skill bars when visible
+      if(e.target.classList.contains('skill-card')){
+        const bar = e.target.querySelector('.skill-card__bar-fill');
+        if(bar){
+          setTimeout(()=>{ bar.style.width = bar.dataset.lvl + '%'; }, 200);
+        }
+      }
+      revealIO.unobserve(e.target);
+    }
+  });
+}, { threshold:0.12, rootMargin:'0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal, .timeline__item').forEach(el=>{
+  revealIO.observe(el);
+});
+
+/* ============ TIMELINE PROGRESS LINE ============ */
+const timeline = document.getElementById('timeline');
+const timelineProgress = document.getElementById('timelineProgress');
+const timelineIO = new IntersectionObserver(([entry])=>{
+  if(entry.isIntersecting){
+    timelineProgress.style.height = '100%';
+  }
+}, { threshold:0.1 });
+timelineIO.observe(timeline);
+
+/* ============ PROJECT CARD 3D TILT ============ */
+document.querySelectorAll('.tilt-card').forEach(card=>{
+  card.addEventListener('mousemove', (e)=>{
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateY(-4px)`;
+  });
+  card.addEventListener('mouseleave', ()=>{
+    card.style.transform = '';
+  });
+});
+
+/* ============ CUSTOM CURSOR ============ */
+const cursorDot = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+let cx = 0, cy = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', (e)=>{
+  cx = e.clientX; cy = e.clientY;
+  cursorDot.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+});
+
+function animateCursor(){
+  rx += (cx - rx) * 0.18;
+  ry += (cy - ry) * 0.18;
+  cursorRing.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+document.querySelectorAll('a, button, .tilt-card, .skill-card, .cert-card, .contact-method').forEach(el=>{
+  el.addEventListener('mouseenter', ()=>cursorRing.classList.add('active'));
+  el.addEventListener('mouseleave', ()=>cursorRing.classList.remove('active'));
+});
+
+/* ============ SMOOTH ANCHOR SCROLL ============ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', (e)=>{
+    const href = a.getAttribute('href');
+    if(href.length > 1){
+      const target = document.querySelector(href);
+      if(target){
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({ top, behavior:'smooth' });
+      }
+    }
+  });
+});
+
+/* ============ CONSOLE EASTER EGG ============ */
+console.log('%c⚡ O\'BRIAN GRIFFITH // TECH OPERATOR', 'color:#00d4ff; font-size:16px; font-weight:bold; font-family:monospace;');
+console.log('%cSystem online. Open to opportunities in cybersecurity, IT, data, and AI.', 'color:#94a6c4; font-family:monospace;');
+console.log('%c→ github.com/Griff-OB', 'color:#4d8eff; font-family:monospace;');
+</script>
+</body>
+</html>
